@@ -1,6 +1,9 @@
 import express from 'express';
 import {PORT} from "./config/env.js";
 
+// database connection
+import connectToDB from "./Database/mongodb.js";
+
 // routes
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.routes.js";
@@ -19,8 +22,10 @@ app.get("/", (req, res) => {
 })
 
 
-app.listen(PORT, ()=>{
+app.listen(PORT, async ()=>{
     console.log(`Subscription Tracker API is running on http://localhost:${PORT}`);
+
+    await connectToDB();
 })
 
 
